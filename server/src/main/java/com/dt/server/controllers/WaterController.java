@@ -2,6 +2,7 @@ package com.dt.server.controllers;
 
 
 import com.dt.server.entities.Water;
+import com.dt.server.requests.WaterRequest;
 import com.dt.server.services.WaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,7 @@ public class WaterController {
     WaterService waterService;
 
     @PostMapping
-    public Water addWaterData(@RequestBody Water newWater){
+    public Water addWaterData(@RequestBody WaterRequest newWater){
         return waterService.saveOneWater(newWater);
     }
 }

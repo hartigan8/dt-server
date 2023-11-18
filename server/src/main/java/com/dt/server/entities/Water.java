@@ -12,10 +12,13 @@ import lombok.Data;
 public class Water {
 
 
-    Long id;
-
     @Id
-    Long time; // unix time
+    private Long date; // unix time
 
-    Integer volume;
+    private Integer volume;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }

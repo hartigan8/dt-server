@@ -22,7 +22,11 @@ public class Step {
     private Integer targetstep;
     private Integer endofTheDayStep;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @Id
-    private Date date;
+    private Long date;
 
 }

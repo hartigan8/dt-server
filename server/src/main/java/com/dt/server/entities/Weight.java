@@ -15,17 +15,17 @@ import java.util.Date;
 
 public class Weight {
 
-    Long id;
-
 
     private String weightType;
 
     private String result;
     @Id
-    private Date dateofMeasurement;
+    private Date date;
     private Integer targetWeight;
 
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
 }

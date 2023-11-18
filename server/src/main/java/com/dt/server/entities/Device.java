@@ -11,7 +11,7 @@ public class Device {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date activation_date;
+    private Long activationDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
