@@ -1,10 +1,16 @@
 package com.dt.server.services;
 
+import com.dt.server.entities.User;
 import com.dt.server.entities.Water;
 import com.dt.server.repos.WaterRepo;
 import com.dt.server.requests.WaterRequest;
+import com.dt.server.security.UserDetailsImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.security.Principal;
 
 @Service
 public class WaterService {
@@ -16,7 +22,9 @@ public class WaterService {
     public Water saveOneWater(WaterRequest waterRequest){
         Water water = new Water();
         try {
-            water.setUser(userService.getOneUserById(waterRequest.getUserId()));
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            User user = userService.getOneUserById(((UserDetailsImp) auth.getPrincipal()).getId());
+            water.setUser(user);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
