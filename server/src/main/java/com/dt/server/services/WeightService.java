@@ -1,24 +1,44 @@
 package com.dt.server.services;
 
+import com.dt.server.entities.User;
 import com.dt.server.entities.Weight;
 import com.dt.server.repos.WeightRepo;
+import com.dt.server.requests.WeightRequest;
+import com.dt.server.security.UserDetailsImp;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
-//@Service
+@Service
 public class WeightService {
 
+    @Autowired
     private WeightRepo weightRepo;
+    @Autowired
+    private UserService userService;
+
+
+
+
+    public Weight saveWeightData(WeightRequest newWeight) {
+        Weight w = new Weight();
+        w.setDate(newWeight.getDate());
+        w.setUnit(newWeight.getUnit());
+        w.setMeasure(newWeight.getMeasure());
+        try {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            User user = userService.getOneUserById(((UserDetailsImp) auth.getPrincipal()).getId());
+            w.setUser(user);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return weightRepo.save(w);
+    }
     /*
-    public List<Weight> getWeightById(Long patientId) {
-        return weightRepository.findAllById(patientId);
-    }
-    */
-
-    public Weight saveWeightData(Weight newWeight) {
-        return weightRepo.save(newWeight);
-    }
-
     public Weight updateWeightData(Long patientId, Weight newWeight) {
     Optional<Weight> weight = weightRepo.findById(patientId);
     if(weight.isPresent()){
@@ -32,7 +52,7 @@ public class WeightService {
     else return null;
 
     }
-
+    */
     public void deleteWeightDataById(Long patientId) {
         weightRepo.deleteById(patientId);
     }

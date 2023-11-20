@@ -12,16 +12,15 @@ import java.util.Date;
 @Entity
 @Table (name = "weight")
 @Data
-
 public class Weight {
 
 
-    private String weightType;
+    private String unit;
 
-    private String result;
+    private Integer measure;
+
     @Id
-    private Date date;
-    private Integer targetWeight;
+    private Long date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
