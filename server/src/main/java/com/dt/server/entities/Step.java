@@ -16,17 +16,16 @@ import java.util.Date;
 
 public class Step {
 
-    private Long id;
-
-
-    private Integer targetstep;
-    private Integer endofTheDayStep;
+    private Long startTime;
+    private Long endTime;
+    private Integer count;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
     @Id
-    private Long date;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
 }

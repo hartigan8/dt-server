@@ -1,6 +1,7 @@
 package com.dt.server.controllers;
 
 import com.dt.server.entities.Weight;
+import com.dt.server.requests.GetBetweenDatesRequest;
 import com.dt.server.requests.WeightRequest;
 import com.dt.server.services.WeightService;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,13 @@ public class WeightController {
         return weightService.saveWeightData(newWeight);
     }
 
+    @GetMapping
+    public List<Weight> getAllWeightBetweenTwoDates(@RequestBody GetBetweenDatesRequest request) {
+        Long startDate = request.getStartDate();
+        Long endDate = request.getEndDate();
+        return weightService.findAllByDateBetween(startDate, endDate);
+
+    }
 
 
 

@@ -10,7 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
+import java.util.List;
 
 @Service
 public class WaterService {
@@ -32,5 +32,10 @@ public class WaterService {
         water.setVolume(waterRequest.getVolume());
 
         return waterRepo.save(water);
+    }
+
+
+    public List<Water> findAllByDateBetween(Long startDate, Long endDate) {
+        return waterRepo.findAllByDateBetween(startDate, endDate);
     }
 }

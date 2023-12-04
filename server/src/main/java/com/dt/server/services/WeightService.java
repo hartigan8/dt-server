@@ -11,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class WeightService {
@@ -55,5 +54,8 @@ public class WeightService {
     */
     public void deleteWeightDataById(Long patientId) {
         weightRepo.deleteById(patientId);
+    }
+    public List<Weight> findAllByDateBetween(Long startDate, Long endDate) {
+        return weightRepo.findAllByDateBetween(startDate, endDate);
     }
 }
