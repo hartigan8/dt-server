@@ -10,14 +10,14 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.util.Date;
 
 @Entity
-@Table (name = "weight")
+@Table (name = "weights")
 @Data
 public class Weight {
 
 
     private String unit;
 
-    private Integer measure;
+    private Float measure;
 
     @Id
     private Long date;

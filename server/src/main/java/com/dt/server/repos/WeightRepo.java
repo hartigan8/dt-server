@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface WeightRepo extends JpaRepository<Weight,Long> {
 
-    @Query(value = "SELECT * FROM weight WHERE date BETWEEN ?1 AND ?2", nativeQuery = true)
-    List<Weight> findAllByDateBetween(Long startDate, Long endDate);
+    @Query(value = "SELECT * FROM weights WHERE user_id = ?1 AND date BETWEEN ?2 AND ?3", nativeQuery = true)
+    List<Weight> findAllByDateBetween(Long id, Long startDate, Long endDate);
 
 
 }

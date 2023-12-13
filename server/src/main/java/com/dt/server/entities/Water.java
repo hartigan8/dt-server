@@ -7,7 +7,7 @@ import lombok.Data;
 
 
 @Entity
-@Table (name ="water")
+@Table (name ="waters")
 @Data
 
 public class Water {

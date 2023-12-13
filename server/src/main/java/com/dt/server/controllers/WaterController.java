@@ -24,11 +24,9 @@ public class WaterController {
     public Water addWaterData(@RequestBody WaterRequest newWater){
         return waterService.saveOneWater(newWater);
     }
-    @GetMapping
+    @PostMapping("/all")
     public List<Water> getAllWaterBetweenTwoDates(@RequestBody GetBetweenDatesRequest request) {
-        Long startDate = request.getStartDate();
-        Long endDate = request.getEndDate();
-        return waterService.findAllByDateBetween(startDate, endDate);
+        return waterService.findAllByDateBetween(request);
 
     }
 }

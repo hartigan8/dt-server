@@ -24,11 +24,9 @@ public class WeightController {
         return weightService.saveWeightData(newWeight);
     }
 
-    @GetMapping
+    @PostMapping("/all")
     public List<Weight> getAllWeightBetweenTwoDates(@RequestBody GetBetweenDatesRequest request) {
-        Long startDate = request.getStartDate();
-        Long endDate = request.getEndDate();
-        return weightService.findAllByDateBetween(startDate, endDate);
+        return weightService.findAllByDateBetween(request);
 
     }
 

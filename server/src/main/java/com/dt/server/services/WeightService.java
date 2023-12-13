@@ -3,6 +3,7 @@ package com.dt.server.services;
 import com.dt.server.entities.User;
 import com.dt.server.entities.Weight;
 import com.dt.server.repos.WeightRepo;
+import com.dt.server.requests.GetBetweenDatesRequest;
 import com.dt.server.requests.WeightRequest;
 import com.dt.server.security.UserDetailsImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,11 @@ public class WeightService {
     public void deleteWeightDataById(Long patientId) {
         weightRepo.deleteById(patientId);
     }
-    public List<Weight> findAllByDateBetween(Long startDate, Long endDate) {
-        return weightRepo.findAllByDateBetween(startDate, endDate);
+    public List<Weight> findAllByDateBetween(GetBetweenDatesRequest twoDate) {
+        Long startDate = twoDate.getStartDate();
+        Long endDate = twoDate.getEndDate();
+        Long id = twoDate.getId();
+
+        return weightRepo.findAllByDateBetween(id, startDate, endDate);
     }
 }

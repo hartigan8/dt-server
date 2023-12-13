@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("auth")
@@ -56,7 +59,7 @@ public class AuthController {
                 .email(request.getEmail())
                 .password(encoder.encode(request.getPassword()))
                 .phoneNumber(request.getPhoneNumber())
-                .role(roleService.findRole("user"))
+                .role(roleService.findRole("patient"))
                 .build();
         User savedUser = userService.save(user);
         UserDetailsImp userDetailsImp = UserDetailsImp.create(user);
@@ -90,13 +93,18 @@ public class AuthController {
         UserDetailsImp userDetailsImp = UserDetailsImp.create(user);
         var jwtToken = tokenProvider.generateToken(userDetailsImp);
         var refreshToken = tokenProvider.generateRefreshToken(userDetailsImp);
-        revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
         return AuthResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .build();
     }
+    @GetMapping("logout")
+    public String getMethodName() {
+        revokeAllUserTokens(userService.loadUserSCH());
+        return "logout";
+    }
+    
     private void revokeAllUserTokens(User user) {
         var validUserTokens = tokenRepo.findAllValidTokenByUser(user.getId());
         if (validUserTokens.isEmpty())

@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface WaterRepo extends JpaRepository<Water, Long> {
 
 
-    @Query(value = "SELECT * FROM water WHERE date BETWEEN ?1 AND ?2", nativeQuery = true)
-    List<Water> findAllByDateBetween(Long startDate, Long endDate);
+    @Query(value = "SELECT * FROM waters WHERE user_id = ?1 AND date BETWEEN ?2 AND ?3", nativeQuery = true)
+    List<Water> findAllByDateBetween(Long id, Long startDate, Long endDate);
     
 }

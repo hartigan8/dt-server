@@ -3,6 +3,7 @@ package com.dt.server.services;
 import com.dt.server.entities.User;
 import com.dt.server.entities.Water;
 import com.dt.server.repos.WaterRepo;
+import com.dt.server.requests.GetBetweenDatesRequest;
 import com.dt.server.requests.WaterRequest;
 import com.dt.server.security.UserDetailsImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,10 @@ public class WaterService {
     }
 
 
-    public List<Water> findAllByDateBetween(Long startDate, Long endDate) {
-        return waterRepo.findAllByDateBetween(startDate, endDate);
+    public List<Water> findAllByDateBetween(GetBetweenDatesRequest twoDate) {
+        Long startDate = twoDate.getStartDate();
+        Long endDate = twoDate.getEndDate();
+        Long id = twoDate.getId();
+        return waterRepo.findAllByDateBetween(id, startDate, endDate);
     }
 }

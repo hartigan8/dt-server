@@ -10,7 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.util.Date;
 
 @Entity
-@Table ( name = "step" )
+@Table ( name = "steps" )
 @Data
 
 
