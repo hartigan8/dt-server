@@ -29,30 +29,10 @@ public class WeightService {
         w.setDate(newWeight.getDate());
         w.setUnit(newWeight.getUnit());
         w.setMeasure(newWeight.getMeasure());
-        try {
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            User user = userService.getOneUserById(((UserDetailsImp) auth.getPrincipal()).getId());
-            w.setUser(user);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        User user = userService.loadUserSCH();
+        w.setUser(user);
         return weightRepo.save(w);
     }
-    /*
-    public Weight updateWeightData(Long patientId, Weight newWeight) {
-    Optional<Weight> weight = weightRepo.findById(patientId);
-    if(weight.isPresent()){
-        Weight foundedWeight = weight.get();
-        foundedWeight.setResult(newWeight.getResult());
-        foundedWeight.setWeightType(newWeight.getWeightType());
-        foundedWeight.setTargetWeight(newWeight.getTargetWeight());
-        weightRepo.save(foundedWeight);
-        return foundedWeight;
-    }
-    else return null;
-
-    }
-    */
     public void deleteWeightDataById(Long patientId) {
         weightRepo.deleteById(patientId);
     }

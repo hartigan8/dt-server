@@ -22,13 +22,8 @@ public class WaterService {
 
     public Water saveOneWater(WaterRequest waterRequest){
         Water water = new Water();
-        try {
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            User user = userService.getOneUserById(((UserDetailsImp) auth.getPrincipal()).getId());
-            water.setUser(user);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        User user = userService.loadUserSCH();
+        water.setUser(user);
         water.setDate(waterRequest.getDate());
         water.setVolume(waterRequest.getVolume());
 
