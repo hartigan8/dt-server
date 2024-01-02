@@ -9,11 +9,8 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.Date;
 
-@Entity
-@Table ( name = "steps" )
+@Entity( name = "steps" ) 
 @Data
-
-
 public class Step {
 
     private Long startTime;
@@ -22,6 +19,7 @@ public class Step {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     @Id

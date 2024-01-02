@@ -1,10 +1,14 @@
 package com.dt.server.services;
 
 import com.dt.server.entities.Step;
+import com.dt.server.entities.Weight;
 import com.dt.server.repos.StepRepo;
+import com.dt.server.requests.GetBetweenDatesRequest;
 import com.dt.server.requests.StepRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class StepService {
@@ -20,5 +24,13 @@ public class StepService {
         step.setEndTime(stepRequest.getEndTime());
         step.setUser(userService.loadUserSCH());
         return stepRepo.save(step);
+    }
+
+    public List<Weight> findAllByDateBetween(GetBetweenDatesRequest request) {
+        Long startDate = request.getStartDate();
+        Long endDate = request.getEndDate();
+        Long id = request.getId();
+
+        return stepRepo.findAllByDateBetween(id, startDate, endDate);
     }
 }
