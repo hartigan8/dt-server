@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Data
-@Entity
+@Entity(name = "heart_rate")
 public class HeartRate {
     private Long startTime;
     private Long endTime;

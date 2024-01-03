@@ -14,15 +14,14 @@ import lombok.Data;
 @Data
 public class BodyFatRate {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
 
+    @Id
     private Long time;
     private Double bodyFatRate;
 }

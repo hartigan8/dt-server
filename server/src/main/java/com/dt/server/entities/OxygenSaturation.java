@@ -10,16 +10,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
-@Entity
+@Entity(name = "oxygen_saturation")
 @Data
 public class OxygenSaturation {
+    @Id
     private Long time;
     private Double value;
 
-    @Id
-    @JsonIgnore
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+
 
     @ManyToOne
     @JoinColumn(name = "user_id")

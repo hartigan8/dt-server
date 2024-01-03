@@ -13,6 +13,7 @@ import lombok.Data;
 @Entity(name = "blood_pressures")
 @Data
 public class BloodPressure {
+    @Id
     private Long time;
     private Integer bodyPosition;
     private Integer measurementLocation;
@@ -24,7 +25,4 @@ public class BloodPressure {
     @JsonIgnore
     private User user;
 
-    @Id
-    @GeneratedValue(strategy =  GenerationType.AUTO)
-    private Long id;
 }
